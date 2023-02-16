@@ -1,4 +1,4 @@
-# dalil_app# dalil_app
+# Dalil_app
 
 A new Flutter project.
 
