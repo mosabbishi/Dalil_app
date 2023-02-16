@@ -20,16 +20,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'دليل',
-          style: Styles().appBarStyle,
-        ),
-        centerTitle: true,
-        elevation: 0.0,
-        // toolbarHeight: 80,
-        backgroundColor: Colors.amberAccent,
-      ),
       body: Constants().navPages[_currentIndex],
       // bottom nav bar
       bottomNavigationBar: BottomNavigationBar(

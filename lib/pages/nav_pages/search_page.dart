@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatelessWidget {
@@ -6,7 +7,20 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('بحث'),),
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0.0,
+        backgroundColor: Colors.amberAccent,
+        toolbarHeight: 74,
+        bottom: const PreferredSize(
+          preferredSize: Size(2, 10),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            child: CupertinoSearchTextField(),
+          ),
+        ),
+      ),
+      body: ListView(),
     );
   }
 }

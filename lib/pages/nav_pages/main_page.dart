@@ -9,6 +9,15 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'دليل',
+          style: Styles().appBarStyle,
+        ),
+        centerTitle: true,
+        elevation: 0.0,
+        backgroundColor: Colors.amberAccent,
+      ),
       //
       body: Padding(
         padding: const EdgeInsets.all(22.0),
