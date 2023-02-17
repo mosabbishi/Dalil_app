@@ -29,6 +29,11 @@ class ProfileBody extends StatelessWidget {
           onTap: () {},
         ),
         ProfileTile(
+          title: 'المظهر',
+          lead: Icons.nights_stay,
+          onTap: () {},
+        ),
+        ProfileTile(
           title: 'الإعدادات',
           lead: Icons.settings,
           onTap: () {},

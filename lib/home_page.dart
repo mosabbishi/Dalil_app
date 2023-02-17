@@ -1,5 +1,4 @@
 import 'package:dalil_app/constant/constants.dart';
-import 'package:dalil_app/constant/styles.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

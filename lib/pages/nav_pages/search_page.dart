@@ -13,7 +13,7 @@ class SearchPage extends StatelessWidget {
         backgroundColor: Colors.amberAccent,
         toolbarHeight: 74,
         bottom: const PreferredSize(
-          preferredSize: Size(2, 10),
+          preferredSize: Size(2, 30),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             child: CupertinoSearchTextField(),

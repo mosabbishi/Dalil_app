@@ -18,9 +18,14 @@ class ProfileHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             backgroundColor: Colors.white,
-            radius: 55,
+            radius: 57,
+            child: Image.asset(
+              'assets/pics/user2.png',
+              fit: BoxFit.fill,
+              height: 70,
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

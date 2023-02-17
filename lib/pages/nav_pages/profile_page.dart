@@ -7,19 +7,22 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).size.height;
+    // double size = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              const ProfileHeader(),
-              const SizedBox(height: 20),
-              //
-              ProfileBody(),
-            ],
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              children: const [
+                ProfileHeader(),
+                SizedBox(height: 20),
+                //
+                ProfileBody(),
+              ],
+            ),
           ),
         ),
       ),
