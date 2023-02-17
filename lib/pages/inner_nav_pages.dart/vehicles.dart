@@ -14,7 +14,7 @@ class Vehicles extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0.0,
+          elevation: 2.0,
           title: Text(subTitle),
           leading: const BackBtn(),
         ),
