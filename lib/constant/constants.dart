@@ -40,7 +40,7 @@ class Constants {
     {
       'title': 'خدمات المركبات',
       'icon': const Icon(Icons.settings),
-      'route': const Vehicles(
+      'route': Vehicles(
         subTitle: 'خدمات المركبات',
       ),
     },
@@ -60,6 +60,6 @@ class Constants {
       'route': const Electronics(subTitle: 'خدمات الإلكترونيات'),
     },
   ];
-  // 
-  
+  //
+
 }

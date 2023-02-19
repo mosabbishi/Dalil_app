@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Styles {
   final appBarStyle = const TextStyle(fontSize: 22, color: Colors.white);
@@ -15,4 +16,6 @@ class Styles {
       color: Colors.grey,
     ),
   ];
+  // colors
+  final red = HexColor('#b80f0a');
 }

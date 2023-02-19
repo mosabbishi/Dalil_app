@@ -19,17 +19,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      localizationsDelegates: [
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          bodyText2: TextStyle(fontFamily: 'Tajawal'),
+          headline6: TextStyle(fontFamily: 'Tajawal'),
+          headline5: TextStyle(fontFamily: 'Tajawal'),
+        ),
+      ),
+      localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('ar', 'AR'),
         Locale('en', 'EN'),
       ],
-      fallbackLocale: Locale('ar', 'AR'),
+      fallbackLocale: const Locale('ar', 'AR'),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
