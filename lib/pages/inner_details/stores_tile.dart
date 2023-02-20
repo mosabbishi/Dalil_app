@@ -19,7 +19,7 @@ class StoreTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 6.0),
         decoration:
-            BoxDecoration(boxShadow: Styles().boxShadows, color: Colors.white),
+            BoxDecoration(boxShadow: Styles.boxShadows, color: Colors.white),
         child: ListTile(
           onTap: onTap,
           leading: const Icon(Icons.account_box),

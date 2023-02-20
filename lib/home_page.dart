@@ -19,14 +19,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Constants().navPages[_currentIndex],
+      body: Constants.navPages[_currentIndex],
       // bottom nav bar
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: changePage,
         selectedItemColor: Colors.amberAccent,
         unselectedItemColor: Colors.black38,
-        items: Constants().navList,
+        items: Constants.navList,
       ),
     );
   }

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class Constants {
   // bottom navigation bar
-  List<BottomNavigationBarItem> navList = const [
+  static List<BottomNavigationBarItem> navList = [
     BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: 'الرئيسية',
@@ -29,14 +29,14 @@ class Constants {
     ),
   ];
   // navigation pages
-  List<Widget> navPages = const [
+  static List<Widget> navPages = const [
     MainPage(),
     SearchPage(),
     MapPage(),
     ProfilePage(),
   ];
   // main categories content
-  List<Map<String, dynamic>> mainCategoriesMap = [
+  static List<Map<String, dynamic>> mainCategoriesMap = [
     {
       'title': 'خدمات المركبات',
       'icon': const Icon(Icons.settings),
@@ -47,17 +47,17 @@ class Constants {
     {
       'title': 'خدمات المنشآت',
       'icon': const Icon(Icons.dangerous),
-      'route': const Buildings(subTitle: 'خدمات المنشآت'),
+      'route': Buildings(subTitle: 'خدمات المنشآت'),
     },
     {
       'title': 'خدمات الأجهزة المنزلية',
       'icon': const Icon(Icons.hail),
-      'route': const Apliences(subTitle: 'خدمات الأجهزة المنزلية'),
+      'route': Apliences(subTitle: 'خدمات الأجهزة المنزلية'),
     },
     {
       'title': 'خدمات الإلكترونيات',
       'icon': const Icon(Icons.safety_check),
-      'route': const Electronics(subTitle: 'خدمات الإلكترونيات'),
+      'route': Electronics(subTitle: 'خدمات الإلكترونيات'),
     },
   ];
   //

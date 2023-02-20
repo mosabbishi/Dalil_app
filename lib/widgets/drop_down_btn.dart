@@ -20,13 +20,9 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     ];
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.white, width: 2),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
       child: DropdownButton(
+        dropdownColor: Colors.grey[400],
         borderRadius: BorderRadius.circular(12.0),
-        dropdownColor: Colors.grey,
         icon: const Icon(
           Icons.arrow_drop_down_circle_outlined,
           color: Colors.white,
@@ -36,9 +32,12 @@ class _DropDownWidgetState extends State<DropDownWidget> {
         items: dropDownItems.map((item) {
           return DropdownMenuItem(
             value: item,
-            child: Text(
-              item.toString(),
-              style: Styles().appBarStyle,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                item.toString(),
+                style: Styles.appBarStyle,
+              ),
             ),
           );
         }).toList(),

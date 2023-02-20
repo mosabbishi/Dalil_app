@@ -18,6 +18,8 @@ class Stores {
     this.gallery,
     this.reviews,
   );
+
+  // Stores.fromJson();
 }
 
 

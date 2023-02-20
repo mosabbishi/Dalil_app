@@ -2,16 +2,14 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/pages/inner_details/stores_tile.dart';
+import 'package:dalil_app/services/firestore_services.dart';
 import 'package:dalil_app/utilities/back_button.dart';
 import 'package:dalil_app/utilities/search_bar.dart';
-import 'package:dalil_app/widgets/filter_container.dart';
 import 'package:flutter/material.dart';
 
 class Vehicles extends StatelessWidget {
   final String subTitle;
   Vehicles({super.key, required this.subTitle});
-
-  CollectionReference ref = FirebaseFirestore.instance.collection('data');
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,7 @@ class Vehicles extends StatelessWidget {
           length: 7,
           child: Scaffold(
             appBar: AppBar(
-                backgroundColor: Styles().red,
+                backgroundColor: Styles.red,
                 elevation: 0.0,
                 title: Text(subTitle),
                 leading: const BackBtn(),
@@ -71,7 +69,7 @@ class Vehicles extends StatelessWidget {
                 )),
             body: TabBarView(children: [
               Tab(
-                child: all(),
+                child: FireStoreServices().all(),
               ),
               Tab(
                 child: Text('fff'),
@@ -96,38 +94,38 @@ class Vehicles extends StatelessWidget {
         ));
   }
 
-  Widget all() {
-    return StreamBuilder(
-        stream: ref.snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, i) {
-                return StoreTile(
-                  title: snapshot.data!.docs[i]['name'],
-                  subtitle: snapshot.data!.docs[i]['name'],
-                  onTap: () {},
-                );
-              },
-            );
-          }
-          if (snapshot.hasError) {
-            return const Center(
-              child: Text('error'),
-            );
-          }
-          if (!snapshot.hasData) {
-            return const Text('no data yet');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return const Center(child: Text('Loading...'));
-        });
-  }
+  // Widget all() {
+  //   return StreamBuilder(
+  //       stream: ref.snapshots(),
+  //       builder: (context, snapshot) {
+  //         if (snapshot.hasData) {
+  //           return ListView.builder(
+  //             physics: const NeverScrollableScrollPhysics(),
+  //             shrinkWrap: true,
+  //             itemCount: snapshot.data!.docs.length,
+  //             itemBuilder: (context, i) {
+  //               return StoreTile(
+  //                 title: snapshot.data!.docs[i]['name'],
+  //                 subtitle: snapshot.data!.docs[i]['name'],
+  //                 onTap: () {},
+  //               );
+  //             },
+  //           );
+  //         }
+  //         if (snapshot.hasError) {
+  //           return const Center(
+  //             child: Text('error'),
+  //           );
+  //         }
+  //         if (!snapshot.hasData) {
+  //           return const Text('no data yet');
+  //         }
+  //         if (snapshot.connectionState == ConnectionState.waiting) {
+  //           return const Center(
+  //             child: CircularProgressIndicator(),
+  //           );
+  //         }
+  //         return const Center(child: Text('Loading...'));
+  //       });
+  // }
 }
