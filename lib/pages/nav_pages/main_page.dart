@@ -24,12 +24,6 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  String location = 'موقعك الحالي';
-  List<dynamic> dropDownItems = [
-    'موقعك الحالي',
-    'جدة',
-    'مكة',
-  ];
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.height;
@@ -45,32 +39,9 @@ class _MainPageState extends State<MainPage> {
                 height: size * 0.12,
                 width: double.infinity,
                 color: Colors.amberAccent,
-                child: DropdownButton(
-                  dropdownColor: Colors.grey[400],
-                  borderRadius: BorderRadius.circular(12.0),
-                  icon: const Icon(
-                    Icons.arrow_drop_down_circle_outlined,
-                    color: Colors.white,
-                  ),
-                  value: location,
-                  hint: Text(location),
-                  items: dropDownItems.map((item) {
-                    return DropdownMenuItem(
-                      value: item,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          item.toString(),
-                          style: Styles.appBarStyle,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (dynamic? newValue) {
-                    setState(() {
-                      location = newValue!;
-                    });
-                  },
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(''),
                 ),
               ),
               //
