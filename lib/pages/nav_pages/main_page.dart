@@ -15,6 +15,12 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  @override
+  void initState() {
+    _getCurrentLocation();
+    super.initState();
+  }
+
   Position? _position;
   void _getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -24,12 +30,6 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  String location = 'موقعك الحالي';
-  List<dynamic> dropDownItems = [
-    'موقعك الحالي',
-    'جدة',
-    'مكة',
-  ];
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.height;
@@ -45,32 +45,17 @@ class _MainPageState extends State<MainPage> {
                 height: size * 0.12,
                 width: double.infinity,
                 color: Colors.amberAccent,
-                child: DropdownButton(
-                  dropdownColor: Colors.grey[400],
-                  borderRadius: BorderRadius.circular(12.0),
-                  icon: const Icon(
-                    Icons.arrow_drop_down_circle_outlined,
-                    color: Colors.white,
+                child: Center(
+                  child: TextButton(
+                    onPressed: () => _getCurrentLocation(),
+                    child: _position != null
+                        ? Column(
+                            children: [
+                              Text('location: $_position'),
+                            ],
+                          )
+                        : Text('get Location'),
                   ),
-                  value: location,
-                  hint: Text(location),
-                  items: dropDownItems.map((item) {
-                    return DropdownMenuItem(
-                      value: item,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          item.toString(),
-                          style: Styles.appBarStyle,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (dynamic? newValue) {
-                    setState(() {
-                      location = newValue!;
-                    });
-                  },
                 ),
               ),
               //
