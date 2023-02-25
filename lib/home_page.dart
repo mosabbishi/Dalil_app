@@ -1,4 +1,5 @@
 import 'package:dalil_app/constant/constants.dart';
+import 'package:dalil_app/constant/styles.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: changePage,
-        selectedItemColor: Colors.amberAccent,
+        selectedItemColor: Styles.red,
         unselectedItemColor: Colors.black38,
         items: Constants.navList,
       ),

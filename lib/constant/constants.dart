@@ -1,7 +1,7 @@
-import 'package:dalil_app/pages/inner_nav_pages.dart/apliences.dart';
-import 'package:dalil_app/pages/inner_nav_pages.dart/buildings.dart';
-import 'package:dalil_app/pages/inner_nav_pages.dart/electronics.dart';
-import 'package:dalil_app/pages/inner_nav_pages.dart/vehicles.dart';
+import 'package:dalil_app/pages/inner_pages.dart/apliences.dart';
+import 'package:dalil_app/pages/inner_pages.dart/buildings.dart';
+import 'package:dalil_app/pages/inner_pages.dart/electronics.dart';
+import 'package:dalil_app/pages/inner_pages.dart/vehicles.dart';
 import 'package:dalil_app/pages/nav_pages/main_page.dart';
 import 'package:dalil_app/pages/nav_pages/map_page.dart';
 import 'package:dalil_app/pages/nav_pages/profile_page.dart';

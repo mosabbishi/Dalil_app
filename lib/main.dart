@@ -41,6 +41,8 @@ class MyApp extends StatelessWidget {
       ],
       fallbackLocale: const Locale('ar', 'AR'),
       debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.leftToRightWithFade,
+      transitionDuration: const Duration(milliseconds: 500),
       home: const HomePage(),
     );
   }

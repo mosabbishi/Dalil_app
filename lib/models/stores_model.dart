@@ -1,12 +1,14 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class Stores {
   final String? name;
   final String? type;
   final String? address;
-  final String? location;
+  final LatLng? location;
   final String? desc;
   final String? headerImage;
-  final List? gallery;
-  final List? reviews;
+  final String? gallery;
+  final String? reviews;
 
   Stores(
     this.name,
@@ -20,7 +22,71 @@ class Stores {
   );
 
   // Stores.fromJson();
+
 }
+
+final List<Stores> stores = [
+  Stores(
+    'name',
+    'type',
+    'address',
+    LatLng(21.3909600, 39.8540100),
+    'desc',
+    'headerImage',
+    'gallery',
+    'reviews',
+  ),
+  Stores(
+    'name',
+    'type',
+    'address',
+    LatLng(21.3409600, 39.8540100),
+    'desc',
+    'headerImage',
+    'gallery',
+    'reviews',
+  ),
+  Stores(
+    'name',
+    'type',
+    'address',
+    LatLng(21.4409600, 38.2540100),
+    'desc',
+    'headerImage',
+    'gallery',
+    'reviews',
+  ),
+  Stores(
+    'name',
+    'type',
+    'address',
+    LatLng(21.4409600, 37.2540100),
+    'desc',
+    'headerImage',
+    'gallery',
+    'reviews',
+  ),
+  Stores(
+    'name',
+    'type',
+    'address',
+    LatLng(21.4409600, 36.2540100),
+    'desc',
+    'headerImage',
+    'gallery',
+    'reviews',
+  ),
+  Stores(
+    'name',
+    'type',
+    'address',
+    LatLng(21.4409600, 36.2540100),
+    'desc',
+    'headerImage',
+    'gallery',
+    'reviews',
+  ),
+];
 
 
 // 

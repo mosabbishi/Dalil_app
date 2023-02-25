@@ -2,8 +2,6 @@
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {
-  
-
   // determin position method
   Future<Position> determinePosition() async {
     bool serviceEabled;
@@ -31,4 +29,6 @@ class LocationService {
 
     return position;
   }
+//
+
 }

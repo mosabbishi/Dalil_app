@@ -1,11 +1,11 @@
 import 'package:dalil_app/constant/constants.dart';
 import 'package:dalil_app/constant/styles.dart';
+import 'package:dalil_app/pages/auth/sign_in/signin_page.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-
-import '../../widgets/drop_down_btn.dart';
-import '../../widgets/header.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -15,6 +15,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  String address1 = '';
+  String address2 = '';
   @override
   void initState() {
     _getCurrentLocation();
@@ -25,6 +27,7 @@ class _MainPageState extends State<MainPage> {
   void _getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
+
     setState(() {
       _position = position;
     });
@@ -36,25 +39,46 @@ class _MainPageState extends State<MainPage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        // drawer: Drawer(child: ListView(children: [UserAccountsDrawerHeader(accountName: accountName, accountEmail: accountEmail)],)),
         //
         body: SafeArea(
           child: Column(
             children: [
               //
-              Container(
-                height: size * 0.12,
-                width: double.infinity,
-                color: Colors.amberAccent,
-                child: Center(
-                  child: TextButton(
-                    onPressed: () => _getCurrentLocation(),
-                    child: _position != null
-                        ? Column(
-                            children: [
-                              Text('location: $_position'),
-                            ],
-                          )
-                        : Text('get Location'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Container(
+                  height: size * 0.09,
+                  width: double.infinity,
+                  // color: Styles.black,
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(
+                        child: FaIcon(
+                          FontAwesomeIcons.user,
+                          color: Colors.white,
+                        ),
+                        backgroundColor: Styles.red,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          'أهلا, ',
+                          style: TextStyle(fontSize: 25),
+                        ),
+                      ),
+                      // TextButton(
+                      //   onPressed: () => _getCurrentLocation(),
+                      //   child: _position != null
+                      //       ? Column(
+                      //           children: [
+                      //             Text('location: $_position'),
+                      //           ],
+                      //         )
+                      //       : const Text('get Location'),
+                      // ),
+                    ],
                   ),
                 ),
               ),
@@ -97,7 +121,7 @@ class _MainPageState extends State<MainPage> {
               //
               const Spacer(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Get.to(() => SigninPage()),
                 child: const Text('اقترح متجر'),
               )
             ],

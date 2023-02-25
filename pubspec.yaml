@@ -13,15 +13,14 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   get: ^4.6.5
-  url_launcher: ^6.1.9
   geolocator: ^9.0.2
   geocoding: ^2.0.5
-  location: ^4.4.0
   google_maps_flutter: ^2.2.3
   #---------
   font_awesome_flutter: ^10.4.0
   hexcolor: ^3.0.1
   buttons_tabbar: ^1.3.6
+  image_picker: ^0.8.6+3
   #----------
   firebase_core: ^2.6.0
   firebase_auth: ^4.2.7

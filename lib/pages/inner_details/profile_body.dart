@@ -1,5 +1,11 @@
+import 'package:dalil_app/pages/inner_details/bookmarks.dart';
+import 'package:dalil_app/pages/inner_details/reviews.dart';
+import 'package:dalil_app/pages/inner_details/settings.dart';
 import 'package:dalil_app/widgets/profile_tiles.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'profile_info.dart';
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody({super.key});
@@ -11,17 +17,17 @@ class ProfileBody extends StatelessWidget {
         ProfileTile(
           title: 'المعلومات الشخصية',
           lead: Icons.account_box,
-          onTap: () {},
+          onTap: () => Get.to(() => const ProfileInfo()),
         ),
         ProfileTile(
           title: 'العلامات المرجعية',
           lead: Icons.bookmarks_rounded,
-          onTap: () {},
+          onTap: () => Get.to(() => const Bookmarks()),
         ),
         ProfileTile(
           title: 'مراجعاتي',
           lead: Icons.chat,
-          onTap: () {},
+          onTap: () => Get.to(() => const Reviews()),
         ),
         ProfileTile(
           title: 'اللغة',
@@ -36,7 +42,7 @@ class ProfileBody extends StatelessWidget {
         ProfileTile(
           title: 'الإعدادات',
           lead: Icons.settings,
-          onTap: () {},
+          onTap: () => Get.to(() => const Settings()),
         ),
         ProfileTile(
           title: 'تسجيل الخروج',
