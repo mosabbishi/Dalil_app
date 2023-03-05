@@ -69,7 +69,7 @@ class Vehicles extends StatelessWidget {
                 )),
             body: TabBarView(children: [
               Tab(
-                child: FireStoreServices().all(),
+                child: FireStoreServices.all(),
               ),
               Tab(
                 child: Text('fff'),

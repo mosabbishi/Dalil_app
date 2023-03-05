@@ -2,6 +2,7 @@ import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/home_page.dart';
 import 'package:dalil_app/models/user_model.dart';
 import 'package:dalil_app/pages/auth/widgets/sign_btn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -89,8 +90,9 @@ class _SignupFormState extends State<SignupForm> {
               if (_formKey.currentState!.validate()) {
                 _authServices
                     .registerNewUser(
-                  _email.text.trim(),
-                  _password.text.trim(),
+                  email: _email.text.trim(),
+                  name: _username.text,
+                  password: _password.text.trim(),
                 )
                     .whenComplete(() {
                   Get.snackbar(

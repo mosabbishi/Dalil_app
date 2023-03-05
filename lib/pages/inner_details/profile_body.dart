@@ -1,6 +1,8 @@
+import 'package:dalil_app/pages/auth/sign_in/signin_page.dart';
 import 'package:dalil_app/pages/inner_details/bookmarks.dart';
 import 'package:dalil_app/pages/inner_details/reviews.dart';
 import 'package:dalil_app/pages/inner_details/settings.dart';
+import 'package:dalil_app/services/auth_service.dart';
 import 'package:dalil_app/widgets/profile_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,7 +49,27 @@ class ProfileBody extends StatelessWidget {
         ProfileTile(
           title: 'تسجيل الخروج',
           lead: Icons.logout,
-          onTap: () {},
+          onTap: () => showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('تسجيل الخروج'),
+              content: const Text('هل تريد تسجيل الخروج ؟'),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0)),
+              actions: [
+                OutlinedButton(
+                    onPressed: () {
+                      AuthService().logOut();
+                      Get.offAll(() => const SigninPage());
+                    },
+                    child: const Text('نعم')),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('إلغاء'),
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );

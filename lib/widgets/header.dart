@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../constant/styles.dart';
-import 'drop_down_btn.dart';
 
 class HeaderContainer extends StatelessWidget {
   const HeaderContainer({
@@ -27,7 +26,6 @@ class HeaderContainer extends StatelessWidget {
                 style: Styles.appBarStyle,
               ),
               // note: the current location doesnt display
-              // DropDownWidget(),
             ],
           ),
           Container(

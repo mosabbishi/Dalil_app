@@ -1,4 +1,5 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:dalil_app/services/firestore_services.dart';
 import 'package:dalil_app/utilities/search_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +14,9 @@ class Electronics extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: DefaultTabController(
-        length: 7,
+        length: 3,
         child: Scaffold(
+          backgroundColor: Colors.grey[200],
           appBar: AppBar(
             title: Text(subTitle),
             leading: const BackBtn(),
@@ -42,22 +44,6 @@ class Electronics extends StatelessWidget {
                         icon: Icon(Icons.shield_outlined),
                         text: "حماية",
                       ),
-                      Tab(
-                        icon: Icon(Icons.local_car_wash_outlined),
-                        text: "نظافة",
-                      ),
-                      Tab(
-                        icon: Icon(Icons.carpenter_outlined),
-                        text: "تشليح",
-                      ),
-                      Tab(
-                        icon: Icon(Icons.car_repair_outlined),
-                        text: "خدمة سريعة",
-                      ),
-                      Tab(
-                        icon: Icon(Icons.tire_repair_sharp),
-                        text: "إطارات",
-                      ),
                     ],
                   ),
                 ],
@@ -67,19 +53,7 @@ class Electronics extends StatelessWidget {
           body: TabBarView(
             children: [
               Tab(
-                child: Text('ddd'),
-              ),
-              Tab(
-                child: Text('ddd'),
-              ),
-              Tab(
-                child: Text('ddd'),
-              ),
-              Tab(
-                child: Text('ddd'),
-              ),
-              Tab(
-                child: Text('ddd'),
+                child: FireStoreServices.all(),
               ),
               Tab(
                 child: Text('ddd'),

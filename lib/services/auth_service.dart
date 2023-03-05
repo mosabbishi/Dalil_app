@@ -3,11 +3,12 @@ import 'package:dalil_app/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
-  User? firebaseUser = FirebaseAuth.instance.currentUser;
+  static User? firebaseUser = FirebaseAuth.instance.currentUser;
   final firebaseAuth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance;
 // create new user
-  Future<void> registerNewUser(String email, String password) async {
+  Future<void> registerNewUser(
+      {required String email, required String name, required String password}) async {
     try {
       await firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -20,7 +21,7 @@ class AuthService {
     await _db.collection('users').add(user.toJson());
   }
 
-// signin existing user
+// signin user
   Future<void> signinUser(String email, String password) async {
     try {
       await firebaseAuth.signInWithEmailAndPassword(
