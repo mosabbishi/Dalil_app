@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'back_button.dart';
+import '../utilities/back_button.dart';
 
 class PositionedIcon extends StatelessWidget {
   const PositionedIcon({
@@ -13,6 +13,15 @@ class PositionedIcon extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white24,
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          child: const BackBtn(
+            color: Colors.white,
+          ),
+        ),
         Row(
           children: [
             Container(
@@ -43,15 +52,6 @@ class PositionedIcon extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white24,
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-          child: const BackBtn(
-            color: Colors.white,
-          ),
         ),
       ],
     );

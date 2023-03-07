@@ -1,7 +1,7 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dalil_app/constant/styles.dart';
-import 'package:dalil_app/pages/inner_details/stores_tile.dart';
+import 'package:dalil_app/widgets/stores_tile.dart';
 import 'package:dalil_app/services/firestore_services.dart';
 import 'package:dalil_app/utilities/back_button.dart';
 import 'package:dalil_app/utilities/search_bar.dart';

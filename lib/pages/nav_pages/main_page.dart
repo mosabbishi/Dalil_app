@@ -1,9 +1,13 @@
 import 'package:dalil_app/constant/constants.dart';
 import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/pages/auth/sign_in/signin_page.dart';
+import 'package:dalil_app/pages/inner_details/suggeestion_page.dart';
 import 'package:dalil_app/pages/nav_pages/search_page.dart';
+import 'package:dalil_app/services/auth_service.dart';
+import 'package:dalil_app/services/firestore_services.dart';
 import 'package:dalil_app/utilities/search_bar.dart';
 import 'package:dalil_app/widgets/header_welcome.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -34,9 +38,11 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  User? user;
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.height;
+     
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Styles.black,
@@ -45,24 +51,23 @@ class _MainPageState extends State<MainPage> {
       ),
       //
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const HeaderWelcome(username: 'username'),
-            //
-            const SearchBar(),
-            //
-            buildCategory(height: size * 0.52),
-            //
-            Center(
-              child: ElevatedButton(
-                onPressed: () => Get.to(() => const SigninPage()),
-                child: const Text('اقترح متجر'),
-              ),
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const HeaderWelcome(),
+          //
+          const SearchBar(),
+          //
+          buildCategory(height: size * 0.52),
+          //
+          Center(
+            child: ElevatedButton(
+              onPressed: () => Get.to(() => const SuggestionPage()),
+              child: const Text('اقترح متجر'),
             ),
-          ],
-        ),
-      ),
+          ),
+        ],
+      )),
     );
   }
 }

@@ -56,10 +56,10 @@ class Electronics extends StatelessWidget {
                 child: FireStoreServices.all(),
               ),
               Tab(
-                child: Text('ddd'),
+                child: FireStoreServices.type(type: 'gas'),
               ),
               Tab(
-                child: Text('ddd'),
+                child: FireStoreServices.type(type: 'protection'),
               ),
             ],
           ),

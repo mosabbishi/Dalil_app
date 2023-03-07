@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 class ProfileTile extends StatelessWidget {
   final String title;
   final IconData lead;
+  final Color? color;
+  final Widget trailing;
   final Function() onTap;
   const ProfileTile({
     super.key,
     required this.title,
     required this.lead,
     required this.onTap,
+    this.trailing = const Icon(Icons.chevron_right),
+    this.color,
   });
 
   @override
@@ -20,9 +24,12 @@ class ProfileTile extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        leading: Icon(lead),
+        leading: Icon(
+          lead,
+          color: color,
+        ),
         title: Text(title),
-        trailing: const Icon(Icons.chevron_right),
+        trailing: trailing,
         onTap: onTap,
       ),
     );

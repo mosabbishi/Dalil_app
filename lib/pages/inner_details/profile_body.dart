@@ -1,3 +1,4 @@
+import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/pages/auth/sign_in/signin_page.dart';
 import 'package:dalil_app/pages/inner_details/bookmarks.dart';
 import 'package:dalil_app/pages/inner_details/reviews.dart';
@@ -32,11 +33,6 @@ class ProfileBody extends StatelessWidget {
           onTap: () => Get.to(() => const Reviews()),
         ),
         ProfileTile(
-          title: 'اللغة',
-          lead: Icons.translate,
-          onTap: () {},
-        ),
-        ProfileTile(
           title: 'المظهر',
           lead: Icons.nights_stay,
           onTap: () {},
@@ -49,6 +45,7 @@ class ProfileBody extends StatelessWidget {
         ProfileTile(
           title: 'تسجيل الخروج',
           lead: Icons.logout,
+          color: Styles.red,
           onTap: () => showDialog(
             context: context,
             builder: (context) => AlertDialog(

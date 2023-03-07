@@ -18,7 +18,6 @@ class ProfilePage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Styles.red,
           elevation: 0.0,
-          leading: const BackBtn(),
           actions: [
             IconButton(
               onPressed: () {},
