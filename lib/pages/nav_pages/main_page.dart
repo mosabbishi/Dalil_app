@@ -42,7 +42,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.height;
-     
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Styles.black,
@@ -54,6 +53,22 @@ class _MainPageState extends State<MainPage> {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(
+                  Icons.nights_stay_sharp,
+                  size: 40,
+                ),
+                Image.asset(
+                  'assets/pics/user.png',
+                  height: 55,
+                ),
+              ],
+            ),
+          ),
           const HeaderWelcome(),
           //
           const SearchBar(),

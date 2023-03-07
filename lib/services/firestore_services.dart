@@ -12,6 +12,8 @@ class FireStoreServices {
       FirebaseFirestore.instance.collection('users');
   static CollectionReference storesCollection =
       FirebaseFirestore.instance.collection('stores');
+  static CollectionReference suggestionsCollection =
+      FirebaseFirestore.instance.collection('suggestions');
   // all data from collection
   static all() {
     return StreamBuilder(
@@ -96,5 +98,21 @@ class FireStoreServices {
           }
           return const Center(child: Text('Loading...'));
         });
+  }
+
+  //
+  static Future<void> makeSuggestion(
+      {required String id,
+      required String name,
+      required String type,
+      required String address}) async {
+    await suggestionsCollection.add({
+      makeSuggestion(
+        id: id,
+        name: name,
+        type: type,
+        address: address,
+      ),
+    });
   }
 }

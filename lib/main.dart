@@ -43,16 +43,6 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         textTheme: Styles.textThemes,
       ),
-      localizationsDelegates: const [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('ar', 'AR'),
-        Locale('en', 'EN'),
-      ],
-      fallbackLocale: const Locale('ar', 'AR'),
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),

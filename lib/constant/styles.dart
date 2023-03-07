@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Styles {
-  static final appBarStyle = const TextStyle(fontSize: 22, color: Colors.white);
+  static const appBarStyle =  TextStyle(fontSize: 22, color: Colors.white);
   //
   static final categoriesDecoration = BoxDecoration(
     borderRadius: BorderRadius.circular(10.0),
     border: Border.all(),
   );
   // box shadow
-  static final boxShadows = const [
+  static const boxShadows =  [
     BoxShadow(
       blurRadius: 10,
       spreadRadius: 1,
@@ -19,11 +19,15 @@ class Styles {
   // colors
   static final red = HexColor('#b80f0a');
   static final black = HexColor('#151411');
+  static final white = HexColor('000000');
   //
-  static final textThemes = TextTheme(
+  static const textThemes = TextTheme(
+    bodyText1: TextStyle(fontFamily: 'Tajawal'),
     bodyText2: TextStyle(fontFamily: 'Tajawal'),
     headline6: TextStyle(fontFamily: 'Tajawal'),
     headline5: TextStyle(fontFamily: 'Tajawal'),
+    button: TextStyle(fontFamily: 'Tajawal'),
+    caption: TextStyle(fontFamily: 'Tajawal'),
   );
   // input decoration
   static buildInputDecoration(String label, IconData suffix) {
