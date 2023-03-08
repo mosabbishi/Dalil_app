@@ -33,24 +33,28 @@ class Constants {
   static List<Map<String, dynamic>> mainCategoriesMap = [
     {
       'title': 'خدمات المركبات',
-      'icon': const Icon(Icons.settings),
+      'image':
+          'https://firebasestorage.googleapis.com/v0/b/dalil-74c22.appspot.com/o/categories%2Fvs.jpg?alt=media&token=d5c34077-5c9a-422a-891b-8d4b4bd6b2cb',
       'route': Vehicles(
         subTitle: 'خدمات المركبات',
       ),
     },
     {
       'title': 'خدمات المنشآت',
-      'icon': const Icon(Icons.dangerous),
+      'image':
+          'https://firebasestorage.googleapis.com/v0/b/dalil-74c22.appspot.com/o/categories%2Fbs.jpg?alt=media&token=5e273a52-4c8e-4c28-9be6-89ef6ee8071b',
       'route': Buildings(subTitle: 'خدمات المنشآت'),
     },
     {
       'title': 'خدمات الأجهزة المنزلية',
-      'icon': const Icon(Icons.hail),
+      'image':
+          'https://firebasestorage.googleapis.com/v0/b/dalil-74c22.appspot.com/o/categories%2Fas.jpg?alt=media&token=051f16af-2036-47a6-9aa9-ed995baf828b',
       'route': Apliences(subTitle: 'خدمات الأجهزة المنزلية'),
     },
     {
       'title': 'خدمات الإلكترونيات',
-      'icon': const Icon(Icons.safety_check),
+      'image':
+          'https://firebasestorage.googleapis.com/v0/b/dalil-74c22.appspot.com/o/categories%2Fes.jpg?alt=media&token=1b0695b8-caf9-49d6-8ff6-48c13576d5a4',
       'route': Electronics(subTitle: 'خدمات الإلكترونيات'),
     },
   ];

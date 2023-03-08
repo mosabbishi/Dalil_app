@@ -1,7 +1,6 @@
 import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/pages/auth/widgets/sigin_form.dart';
 import 'package:dalil_app/pages/auth/sign_up/signup_page.dart';
-import 'package:dalil_app/utilities/back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +13,6 @@ class SigninPage extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          leading: const BackBtn(),
           backgroundColor: Styles.red,
           elevation: 0.0,
         ),
