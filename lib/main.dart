@@ -2,13 +2,10 @@ import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/firebase_options.dart';
 import 'package:dalil_app/home_page.dart';
 import 'package:dalil_app/pages/auth/sign_in/signin_page.dart';
-import 'package:dalil_app/services/auth_service.dart';
-import 'package:dalil_app/services/location_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
 Future<void> main() async {
