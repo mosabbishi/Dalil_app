@@ -14,6 +14,8 @@ class FireStoreServices {
       FirebaseFirestore.instance.collection('stores');
   static CollectionReference suggestionsCollection =
       FirebaseFirestore.instance.collection('suggestions');
+  static CollectionReference reviewsCollection =
+      FirebaseFirestore.instance.collection('reviews');
   // all data from collection
   static all() {
     return StreamBuilder(
@@ -82,20 +84,19 @@ class FireStoreServices {
                 );
               },
             );
+          } else if (!snapshot.hasData) {
+            return const Center(
+                child: Icon(
+              Icons.close_sharp,
+              size: 50,
+            ));
           }
           if (snapshot.hasError) {
             return const Center(
               child: Text('error'),
             );
           }
-          if (!snapshot.hasData) {
-            return const Text('no data yet');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+
           return const Center(child: Text('Loading...'));
         });
   }
@@ -114,5 +115,9 @@ class FireStoreServices {
         address: address,
       ),
     });
+  }
+
+  static Future deleteReview(id) async {
+    reviewsCollection.doc(id).delete();
   }
 }

@@ -21,14 +21,14 @@ class HeaderUsername extends StatelessWidget {
               itemCount: 1,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 12.0, top: 12.0),
-                  child: Column(
+                  padding: const EdgeInsets.only(top: 12.0),
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'أهلا,',
+                        'أهلا, ',
                         style: TextStyle(
-                          fontSize: 32,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

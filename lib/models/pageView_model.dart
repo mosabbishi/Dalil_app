@@ -14,14 +14,14 @@ class PageViewModel {
 
 final List<PageViewModel> pageViewItems = [
   PageViewModel(
-    title: 'أفضل المتاجر و\nمقدمي الخدمات',
-    content: 'content',
+    title: '',
+    content: '',
     image: 'assets/pics/banner2.png',
   ),
   PageViewModel(
     title: '',
     content: '',
-    image: 'assets/pics/banner2.png',
+    image: 'assets/pics/banner3.png',
   ),
   PageViewModel(
     title: '',

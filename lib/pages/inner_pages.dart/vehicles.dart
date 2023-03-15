@@ -1,7 +1,5 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dalil_app/constant/styles.dart';
-import 'package:dalil_app/widgets/stores_tile.dart';
 import 'package:dalil_app/services/firestore_services.dart';
 import 'package:dalil_app/utilities/back_button.dart';
 import 'package:dalil_app/utilities/search_bar.dart';
@@ -13,6 +11,7 @@ class Vehicles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double size = MediaQuery.of(context).size.height;
     return Directionality(
         textDirection: TextDirection.rtl,
         child: DefaultTabController(
@@ -72,60 +71,26 @@ class Vehicles extends StatelessWidget {
                 child: FireStoreServices.all(),
               ),
               Tab(
-                child: Text('fff'),
+                child: FireStoreServices.type(type: 'بنزين'),
               ),
               Tab(
-                child: Text('fff'),
+                child: FireStoreServices.type(type: 'حماية'),
               ),
               Tab(
-                child: Text('xx'),
+                child: FireStoreServices.type(type: 'نظافة'),
               ),
               Tab(
-                child: Text('ssf'),
+                child: FireStoreServices.type(type: 'تشليح'),
               ),
               Tab(
-                child: Text('ssf'),
+                child: FireStoreServices.type(type: 'خدمة سريعة'),
               ),
               Tab(
-                child: Text('ssf'),
+                child: FireStoreServices.type(type: 'إطارات'),
               ),
             ]),
           ),
         ));
   }
 
-  // Widget all() {
-  //   return StreamBuilder(
-  //       stream: ref.snapshots(),
-  //       builder: (context, snapshot) {
-  //         if (snapshot.hasData) {
-  //           return ListView.builder(
-  //             physics: const NeverScrollableScrollPhysics(),
-  //             shrinkWrap: true,
-  //             itemCount: snapshot.data!.docs.length,
-  //             itemBuilder: (context, i) {
-  //               return StoreTile(
-  //                 title: snapshot.data!.docs[i]['name'],
-  //                 subtitle: snapshot.data!.docs[i]['name'],
-  //                 onTap: () {},
-  //               );
-  //             },
-  //           );
-  //         }
-  //         if (snapshot.hasError) {
-  //           return const Center(
-  //             child: Text('error'),
-  //           );
-  //         }
-  //         if (!snapshot.hasData) {
-  //           return const Text('no data yet');
-  //         }
-  //         if (snapshot.connectionState == ConnectionState.waiting) {
-  //           return const Center(
-  //             child: CircularProgressIndicator(),
-  //           );
-  //         }
-  //         return const Center(child: Text('Loading...'));
-  //       });
-  // }
 }

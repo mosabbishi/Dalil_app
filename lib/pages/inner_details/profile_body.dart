@@ -11,7 +11,8 @@ import 'package:get/get.dart';
 import 'profile_info.dart';
 
 class ProfileBody extends StatelessWidget {
-  const ProfileBody({super.key});
+  final Function() function;
+  const ProfileBody({super.key, required this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class ProfileBody extends StatelessWidget {
         ProfileTile(
           title: 'المعلومات الشخصية',
           lead: Icons.account_box,
-          onTap: () => Get.to(() => const ProfileInfo()),
+          onTap: () => Get.to(() =>  ProfileInfo()),
         ),
         ProfileTile(
           title: 'العلامات المرجعية',
@@ -30,7 +31,7 @@ class ProfileBody extends StatelessWidget {
         ProfileTile(
           title: 'مراجعاتي',
           lead: Icons.chat,
-          onTap: () => Get.to(() => const Reviews()),
+          onTap: () => Get.to(() =>  Reviews()),
         ),
         ProfileTile(
           title: 'المظهر',

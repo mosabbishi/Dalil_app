@@ -3,12 +3,16 @@ import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/models/pageView_model.dart';
 import 'package:dalil_app/pages/inner_details/suggeestion_page.dart';
 import 'package:dalil_app/pages/nav_pages/search_page.dart';
+import 'package:dalil_app/services/location_service.dart';
 import 'package:dalil_app/utilities/search_bar.dart';
 import 'package:dalil_app/widgets/header_username.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../widgets/indicator.dart';
 import '../../widgets/page_view_item.dart';
@@ -22,8 +26,10 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  var data = 'حدد موقعك من هنا';
   bool isActive = true;
   int _selectedIndex = 0;
+  final TextEditingController _userlocctrl = TextEditingController();
   final pageController = PageController(viewportFraction: 0.9);
   @override
   Widget build(BuildContext context) {
@@ -37,6 +43,19 @@ class _MainPageState extends State<MainPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               mainPageheader(),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      getPosition();
+                    },
+                    icon: const Icon(Icons.my_location),
+                  ),
+                  Text(
+                    data,
+                  ),
+                ],
+              ),
               // pageview
               Padding(
                 padding:
@@ -44,7 +63,7 @@ class _MainPageState extends State<MainPage> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: size * 0.2,
+                      height: size * 0.25,
                       child: PageView.builder(
                         controller: pageController,
                         scrollDirection: Axis.horizontal,
@@ -65,51 +84,25 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     // indicators
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ...List.generate(
-                          pageViewItems.length,
-                          (index) => Indicator(
-                            isActive: _selectedIndex == index ? true : false,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ...List.generate(
+                            pageViewItems.length,
+                            (index) => Indicator(
+                              isActive: _selectedIndex == index ? true : false,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
               //
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: GestureDetector(
-                  onTap: () => Get.to(() => const SearchPage()),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0),
-                      color: Colors.grey[400],
-                    ),
-                    width: double.infinity,
-                    height: 40,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.magnifyingGlass,
-                            color: Styles.white,
-                          ),
-                          const SizedBox(width: 5.0),
-                          Text(
-                            'بحث',
-                            style: TextStyle(color: Styles.white, fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              searchBar(),
               //
               Padding(
                 padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
@@ -125,6 +118,7 @@ class _MainPageState extends State<MainPage> {
               //
               buildCategory(height: size * 0.52),
               //
+
               Center(
                 child: ElevatedButton(
                   onPressed: () => Get.to(() => const SuggestionPage()),
@@ -136,6 +130,54 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
     );
+  }
+
+
+
+//
+  determinePosition() async {
+    bool serviceEabled;
+    LocationPermission permission;
+    // is the location service enabled?
+    serviceEabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEabled) {
+      return Future.error('error');
+    }
+
+    // check if the location service is enabled or not
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('denied');
+      }
+    }
+    // manually enable the location services from settings
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('denied forever');
+    }
+    //
+    Position position = await Geolocator.getCurrentPosition();
+
+    return position;
+  }
+
+  void getPosition() async {
+    var status = await Permission.location.request();
+    if (status == PermissionStatus.granted) {
+      Position datas = await determinePosition();
+      getAddresFromLatLong(datas);
+    }
+  }
+
+  void getAddresFromLatLong(Position datas) async {
+    List<Placemark> placemark =
+        await placemarkFromCoordinates(datas.latitude, datas.longitude);
+    Placemark place = placemark[0];
+    var address = '${place.locality},${place.subLocality}';
+    setState(() {
+      data = address;
+    });
   }
 }
 
@@ -199,17 +241,60 @@ Widget buildCategory({required double height}) {
   );
 }
 
+//
 Widget mainPageheader() {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 12.0),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: const [
-        Expanded(child: HeaderUsername()),
-        Spacer(flex: 2),
-        HeaderAvatar(),
+      children: [
+        Expanded(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const HeaderUsername(),
+          ],
+        )),
+        const Spacer(flex: 1),
+        const HeaderAvatar(),
       ],
+    ),
+  );
+}
+
+//
+Widget searchBar() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+    child: GestureDetector(
+      onTap: () {
+        Get.to(() => const SearchPage());
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: Colors.grey[400],
+        ),
+        width: double.infinity,
+        height: 40,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: Row(
+            children: [
+              FaIcon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: Styles.white,
+              ),
+              const SizedBox(width: 5.0),
+              Text(
+                'بحث',
+                style: TextStyle(color: Styles.white, fontSize: 18),
+              ),
+            ],
+          ),
+        ),
+      ),
     ),
   );
 }

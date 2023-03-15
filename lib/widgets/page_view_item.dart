@@ -29,7 +29,7 @@ class PageViewItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.0),
           ),
           margin: const EdgeInsets.symmetric(horizontal: 10.0),
-          height: 150,
+          height: 170,
           width: double.infinity,
           child: Center(
             child: Column(

@@ -1,10 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dalil_app/pages/inner_details/personal_info_details.dart';
 import 'package:dalil_app/utilities/back_button.dart';
 import 'package:dalil_app/widgets/profile_tiles.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../services/auth_service.dart';
+import '../../services/firestore_services.dart';
+
 class ProfileInfo extends StatefulWidget {
-  const ProfileInfo({super.key});
+  ProfileInfo({
+    super.key,
+  });
 
   @override
   State<ProfileInfo> createState() => _ProfileInfoState();
@@ -58,7 +66,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 ),
                                 child: const Icon(Icons.add_a_photo_outlined),
                               )),
-                              // Image.file(pi)
+                          // Image.file(pi)
                         ],
                       ),
                     );
@@ -68,18 +76,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
               },
             ),
             ProfileTile(
-              title: 'اسم المستخدم',
-              lead: Icons.ac_unit,
+              title: 'معلومات المستخدم',
+              lead: Icons.info_outline,
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                      color: Colors.amber,
-                      height: 200,
-                    );
-                  },
-                );
+                Get.to(() => PersonalInfoDetails());
               },
             ),
           ],

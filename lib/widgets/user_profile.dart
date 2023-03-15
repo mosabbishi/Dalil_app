@@ -5,14 +5,9 @@ class UserData extends StatelessWidget {
   final style = const TextStyle(fontSize: 18, color: Colors.white);
   final String username;
   final String? email;
-  final String phone;
   final String? password;
   const UserData(
-      {super.key,
-      required this.username,
-      this.email,
-      required this.phone,
-      this.password});
+      {super.key, required this.username, this.email, this.password});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +31,6 @@ class UserData extends StatelessWidget {
           ),
           Text(
             email!,
-            style: style,
-          ),
-          Text(
-            phone,
             style: style,
           ),
         ],

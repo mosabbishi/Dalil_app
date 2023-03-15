@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       theme: ThemeData(
         textTheme: Styles.textThemes,
+        useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.leftToRightWithFade,
