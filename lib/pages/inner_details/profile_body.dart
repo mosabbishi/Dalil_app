@@ -11,8 +11,7 @@ import 'package:get/get.dart';
 import 'profile_info.dart';
 
 class ProfileBody extends StatelessWidget {
-  final Function() function;
-  const ProfileBody({super.key, required this.function});
+  const ProfileBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +31,6 @@ class ProfileBody extends StatelessWidget {
           title: 'مراجعاتي',
           lead: Icons.chat,
           onTap: () => Get.to(() =>  Reviews()),
-        ),
-        ProfileTile(
-          title: 'المظهر',
-          lead: Icons.nights_stay,
-          onTap: () {},
         ),
         ProfileTile(
           title: 'الإعدادات',

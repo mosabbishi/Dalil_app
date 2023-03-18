@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dalil_app/pages/inner_details/personal_info_details.dart';
 import 'package:dalil_app/utilities/back_button.dart';
 import 'package:dalil_app/widgets/profile_tiles.dart';
@@ -6,13 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../services/auth_service.dart';
-import '../../services/firestore_services.dart';
-
 class ProfileInfo extends StatefulWidget {
-  ProfileInfo({
-    super.key,
-  });
+  ProfileInfo({super.key});
 
   @override
   State<ProfileInfo> createState() => _ProfileInfoState();

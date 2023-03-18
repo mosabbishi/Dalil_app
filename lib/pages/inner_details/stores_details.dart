@@ -3,6 +3,7 @@ import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/services/auth_service.dart';
 import 'package:dalil_app/services/firestore_services.dart';
 import 'package:dalil_app/widgets/business_hours.dart';
+import 'package:dalil_app/widgets/contact_row.dart';
 import 'package:dalil_app/widgets/positioned_icon.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class _StoreDetailsState extends State<StoreDetails> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
                           Icon(Icons.clear),
-                          Text('data'),
+                          Text('error'),
                         ],
                       ),
                     ),
@@ -90,11 +91,23 @@ class _StoreDetailsState extends State<StoreDetails> {
                         widget.documentSnapshot['name'],
                       ),
                     ),
-                    const Positioned(
+                    Positioned(
                       top: 20,
                       left: 0,
                       right: 0,
-                      child: PositionedIcon(),
+                      child: PositionedIcon(
+                        function: () async {
+                          await FireStoreServices.addToBookmarks(
+                            id: widget.documentSnapshot.id,
+                            user: AuthService.firebaseUser!.email.toString(),
+                            image: widget.documentSnapshot['header-image'],
+                            name: widget.documentSnapshot['name'],
+                            type: widget.documentSnapshot['type'],
+                            address: widget.documentSnapshot['address'],
+                            location: widget.documentSnapshot['location'],
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -144,10 +157,28 @@ class _StoreDetailsState extends State<StoreDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.documentSnapshot['name']),
-          const Text('وصف:'),
+          Text(
+            widget.documentSnapshot['name'],
+            style: const TextStyle(fontSize: 24),
+          ),
           Text(widget.documentSnapshot['address']),
+          const Text(
+            'وصف:',
+            style: TextStyle(fontSize: 24),
+          ),
           Text(widget.documentSnapshot['desc']),
+          // contact
+          const Text(
+            'تواصل',
+            style: TextStyle(fontSize: 24),
+          ),
+          ContactRow(
+            contact: widget.documentSnapshot == null
+                ? '-'
+                : widget.documentSnapshot['phone'],
+            icon: Icons.call,
+            color: Colors.green,
+          ),
           const Text(
             'ساعات العمل',
             style: TextStyle(fontSize: 24),
@@ -163,7 +194,10 @@ class _StoreDetailsState extends State<StoreDetails> {
                 )
                 .toList(),
           ),
-          const Text('الموقع على الخريطة'),
+          const Text(
+            'الموقع على الخريطة',
+            style: TextStyle(fontSize: 24),
+          ),
           Container(
             padding: const EdgeInsets.all(12.0),
             height: 150,

@@ -24,19 +24,19 @@ class _MapPageState extends State<MapPage> {
     );
     _setCircles();
     _getCurrentLocation();
-    stores.forEach((element) {
-      markers.add(
-        Marker(
-          markerId: MarkerId(element.name!),
-          draggable: false,
-          infoWindow: InfoWindow(
-            title: element.name!,
-            snippet: element.address!,
-          ),
-          position: element.location!,
-        ),
-      );
-    });
+    // stores.forEach((element) {
+    //   markers.add(
+    //     Marker(
+    //       markerId: MarkerId(element.name!),
+    //       draggable: false,
+    //       infoWindow: InfoWindow(
+    //         title: element.name!,
+    //         snippet: element.address!,
+    //       ),
+    //       position: element.location!,
+    //     ),
+    //   );
+    // });
     super.initState();
   }
 

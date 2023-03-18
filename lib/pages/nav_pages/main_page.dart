@@ -3,8 +3,6 @@ import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/models/pageView_model.dart';
 import 'package:dalil_app/pages/inner_details/suggeestion_page.dart';
 import 'package:dalil_app/pages/nav_pages/search_page.dart';
-import 'package:dalil_app/services/location_service.dart';
-import 'package:dalil_app/utilities/search_bar.dart';
 import 'package:dalil_app/widgets/header_username.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -132,8 +130,6 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-
-
 //
   determinePosition() async {
     bool serviceEabled;
@@ -246,12 +242,11 @@ Widget mainPageheader() {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 12.0),
     child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
             child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const HeaderUsername(),
           ],

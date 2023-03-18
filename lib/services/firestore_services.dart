@@ -16,6 +16,8 @@ class FireStoreServices {
       FirebaseFirestore.instance.collection('suggestions');
   static CollectionReference reviewsCollection =
       FirebaseFirestore.instance.collection('reviews');
+  static CollectionReference bookmarksCollection =
+      FirebaseFirestore.instance.collection('bookmarks');
   // all data from collection
   static all() {
     return StreamBuilder(
@@ -119,5 +121,45 @@ class FireStoreServices {
 
   static Future deleteReview(id) async {
     reviewsCollection.doc(id).delete();
+  }
+
+  static Future updateDocument({
+    id,
+    required String username,
+    required String email,
+    required String phone,
+    required String password,
+  }) async {
+    FireStoreServices.userCollection.doc(id).update({
+      "username": username,
+      "email": email,
+      "phone": phone,
+      "password": password,
+    });
+  }
+
+  static Future addToBookmarks({
+    id,
+    required String name,
+    required String type,
+    required String address,
+    required String user,
+    required String image,
+    required GeoPoint location,
+  }) async {
+    FireStoreServices.bookmarksCollection.doc(id).set({
+      "username": user,
+      "header-image": image,
+      "name": name,
+      "type": type,
+      "address": address,
+      "location": location,
+    });
+  }
+
+  static Future addToUserProfile({required id, required String image}) async {
+    await userCollection.doc(id).update({
+      "profile-image": image,
+    });
   }
 }

@@ -1,40 +1,41 @@
-import 'package:dalil_app/constant/constants.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class UserData extends StatelessWidget {
-  final style = const TextStyle(fontSize: 18, color: Colors.white);
-  final String username;
-  final String? email;
-  final String? password;
-  const UserData(
-      {super.key, required this.username, this.email, this.password});
+// class UserData extends StatelessWidget {
+//   final String username;
+//   String? image;
+//   UserData({super.key, required this.username, this.image});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(22.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Image.network(
-              Constants.img,
-              fit: BoxFit.cover,
-              height: 100,
-            ),
-          ),
-          Text(
-            username,
-            style: style,
-          ),
-          Text(
-            email!,
-            style: style,
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   final style = const TextStyle(fontSize: 18, color: Colors.white);
+
+//   bool isNull = false;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.all(22.0),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           CircleAvatar(
+//             radius: 52.0,
+//             child: isNull
+//                 ? Image.network(
+//                     image!,
+//                     height: 85,
+//                     fit: BoxFit.cover,
+//                   )
+//                 : const Placeholder(
+//                     strokeWidth: 4.0,
+//                     color: Colors.black26,
+//                   ),
+//           ),
+//           Text(
+//             username,
+//             style: style,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

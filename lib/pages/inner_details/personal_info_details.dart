@@ -13,6 +13,7 @@ class PersonalInfoDetails extends StatefulWidget {
 }
 
 class _PersonalInfoDetailsState extends State<PersonalInfoDetails> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _username = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _phone = TextEditingController();
@@ -39,36 +40,67 @@ class _PersonalInfoDetailsState extends State<PersonalInfoDetails> {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     DocumentSnapshot docs = snapshot.data!.docs[index];
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('اسم المستخدم'),
-                        TextFormField(
-                          initialValue: docs['username'],
-                          // controller: _username,
-                        ),
-                        const Text('البريد الإلكتروني'),
-                        TextFormField(
-                          initialValue: docs['email'],
-                          // controller: _email,
-                        ),
-                        const Text('رقم الجوال'),
-                        TextFormField(
-                          initialValue: docs['phone'],
-                          // controller: _phone,
-                        ),
-                        const Text('كلمة المرور'),
-                        TextFormField(
-                          initialValue: docs['password'],
-                          // controller: _password,
-                        ),
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text('تعديل'),
+                    return Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('اسم المستخدم'),
+                          TextFormField(
+                            decoration: InputDecoration(
+                                hintText: docs['username'],
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () {},
+                                )),
+                            controller: _username,
                           ),
-                        ),
-                      ],
+                          const Text('البريد الإلكتروني'),
+                          TextFormField(
+                            decoration: InputDecoration(
+                                hintText: docs['email'],
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () {},
+                                )),
+                            controller: _email,
+                          ),
+                          const Text('رقم الجوال'),
+                          TextFormField(
+                            controller: _phone,
+                            decoration: InputDecoration(
+                                hintText: docs['phone'],
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () {},
+                                )),
+                          ),
+                          const Text('كلمة المرور'),
+                          TextFormField(
+                            decoration: InputDecoration(
+                                hintText: docs['password'],
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () {},
+                                )),
+                            controller: _password,
+                          ),
+                          Center(
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                await FireStoreServices.updateDocument(
+                                  id: docs.id,
+                                  username: _username.text,
+                                  email: _email.text,
+                                  phone: _phone.text,
+                                  password: _password.text,
+                                );
+                              },
+                              child: const Text('تعديل'),
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -77,6 +109,34 @@ class _PersonalInfoDetailsState extends State<PersonalInfoDetails> {
             return const Center();
           },
         ),
+      ),
+    );
+  }
+
+  Future updateScreen() async {
+    return Scaffold(
+      body: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(),
+            ),
+          ),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                FireStoreServices.updateDocument(
+                  username: _username.text,
+                  email: _email.text,
+                  phone: _phone.text,
+                  password: _password.text,
+                );
+              },
+              child: const Text('تعديل'),
+            ),
+          ),
+        ],
       ),
     );
   }

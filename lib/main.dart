@@ -33,9 +33,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-    );
+    SystemUiMode.immersiveSticky;
     return GetMaterialApp(
       theme: ThemeData(
         textTheme: Styles.textThemes,
@@ -43,7 +41,7 @@ class _MyAppState extends State<MyApp> {
       ),
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.leftToRightWithFade,
-      transitionDuration: const Duration(milliseconds: 500),
+      transitionDuration: const Duration(milliseconds: 300),
       home: user != null ? HomePage() : SigninPage(),
     );
   }

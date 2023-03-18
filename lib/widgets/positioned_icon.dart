@@ -1,11 +1,13 @@
+import 'package:dalil_app/services/firestore_services.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../utilities/back_button.dart';
 
 class PositionedIcon extends StatelessWidget {
+  final Function() function;
   const PositionedIcon({
-    super.key,
+    super.key, required this.function,
   });
 
   @override
@@ -34,10 +36,11 @@ class PositionedIcon extends StatelessWidget {
                   FontAwesomeIcons.bookmark,
                   color: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: function,
               ),
             ),
             const SizedBox(width: 10),
+            //
             Container(
               decoration: BoxDecoration(
                 color: Colors.white24,

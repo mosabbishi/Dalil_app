@@ -107,6 +107,7 @@ class _SignupFormState extends State<SignupForm> {
                       email: _email.text.trim(),
                       phone: _phone.text.trim(),
                       password: _password.text.trim(),
+                      image: '',
                     ),
                   );
                   Get.offAll(() => const HomePage());

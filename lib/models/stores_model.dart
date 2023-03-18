@@ -1,14 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Stores {
-  final String? name;
-  final String? type;
-  final String? address;
-  final LatLng? location;
-  final String? desc;
-  final String? headerImage;
-  final String? gallery;
-  final String? reviews;
+  String? name;
+  String? type;
+  String? address;
+  LatLng? location;
+  String? desc;
+  String? headerImage;
+  String? gallery;
+  String? reviews;
 
   Stores(
     this.name,
@@ -21,72 +22,18 @@ class Stores {
     this.reviews,
   );
 
-  // Stores.fromJson();
-
+  Stores.fromJson(Map<String, dynamic> fromJson) {
+    // fromJson = documentSnapshot; as DocumentSnapshot;
+    // DocumentSnapshot documentSnapshot = Stores.fromJson();
+    // return Stores(
+    fromJson['name'];
+    // name = documentSnapshot['name'],
+    //   type = documentSnapshot['type'],
+    //   address = documentSnapshot['address'],
+    //   location = documentSnapshot['location'],
+    //   desc = documentSnapshot['desc'],
+    //   headerImage = documentSnapshot['header-image'],
+    //   gallery = documentSnapshot['gallery'],
+    // );
+  }
 }
-
-final List<Stores> stores = [
-  Stores(
-    'name',
-    'type',
-    'address',
-    LatLng(21.3909600, 39.8540100),
-    'desc',
-    'headerImage',
-    'gallery',
-    'reviews',
-  ),
-  Stores(
-    'name',
-    'type',
-    'address',
-    LatLng(21.3409600, 39.8540100),
-    'desc',
-    'headerImage',
-    'gallery',
-    'reviews',
-  ),
-  Stores(
-    'name',
-    'type',
-    'address',
-    LatLng(21.4409600, 38.2540100),
-    'desc',
-    'headerImage',
-    'gallery',
-    'reviews',
-  ),
-  Stores(
-    'name',
-    'type',
-    'address',
-    LatLng(21.4409600, 37.2540100),
-    'desc',
-    'headerImage',
-    'gallery',
-    'reviews',
-  ),
-  Stores(
-    'name',
-    'type',
-    'address',
-    LatLng(21.4409600, 36.2540100),
-    'desc',
-    'headerImage',
-    'gallery',
-    'reviews',
-  ),
-  Stores(
-    'name',
-    'type',
-    'address',
-    LatLng(21.4409600, 36.2540100),
-    'desc',
-    'headerImage',
-    'gallery',
-    'reviews',
-  ),
-];
-
-
-// 

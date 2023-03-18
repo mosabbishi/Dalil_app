@@ -1,11 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import '../services/firestore_services.dart';
 
 class HeaderUsername extends StatelessWidget {
-  const HeaderUsername({
-    super.key,
-  });
+  const HeaderUsername({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,31 +14,25 @@ class HeaderUsername extends StatelessWidget {
             .snapshots(),
         builder: (context, snapshot) {
           if (AuthService.firebaseUser != null) {
-            return ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 1,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'أهلا, ',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        snapshot.data!.docs[index]['username'],
-                        style: const TextStyle(fontSize: 28),
-                      ),
-                    ],
+            DocumentSnapshot docs = snapshot.data!.docs[0];
+            return Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'أهلا, ',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                );
-              },
+                  Text(
+                    docs.get('username'),
+                    style: const TextStyle(fontSize: 28),
+                  ),
+                ],
+              ),
             );
           } else if (AuthService.firebaseUser == null) {
             return const Text('');
