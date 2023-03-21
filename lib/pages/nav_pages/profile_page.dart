@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:dalil_app/constant/constants.dart';
 import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/pages/inner_details/profile_body.dart';
 import 'package:dalil_app/services/auth_service.dart';
 import 'package:dalil_app/services/firestore_services.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,6 +19,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   String imageUrl = '';
+  bool isExist = false;
 
   void uploadImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -37,8 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
         body: StreamBuilder(
           stream: FireStoreServices.userCollection
               .where('email', isEqualTo: AuthService.firebaseUser!.email)
-              .get()
-              .asStream(),
+              .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
@@ -57,30 +59,33 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Stack(
                                 children: [
                                   Container(
-                                    height: 140,
-                                    width: 140,
-                                    padding: const EdgeInsets.all(8.0),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: Styles.white, width: 2.0),
-                                    ),
-                                    child: Container(
-                                      height: 110,
-                                      width: 110,
+                                      height: 120,
+                                      width: 120,
+                                      padding: const EdgeInsets.all(8.0),
                                       decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Styles.black,
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                            snapshot.data!.docs[0]
-                                                .get('profile-image'),
-                                          ),
-                                        ),
+                                        shape: BoxShape.rectangle,
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                        border: Border.all(
+                                            color: Styles.white, width: 2.0),
                                       ),
-                                    ),
-                                  ),
+                                      child: isExist
+                                          ? Icon(
+                                              Icons.no_photography,
+                                              color: Styles.white,
+                                              size: 40,
+                                            )
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15.0),
+                                              child: FancyShimmerImage(
+                                                imageUrl: snapshot.data!.docs[0]
+                                                    ['profile-image'],
+                                                boxFit: BoxFit.cover,
+                                                errorWidget:
+                                                    const Icon(Icons.abc),
+                                              ),
+                                            )),
                                   Positioned(
                                     bottom: 0.0,
                                     right: 15.0,
@@ -89,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         uploadImage();
                                         FireStoreServices.addToUserProfile(
                                           id: snapshot.data!.docs[0].id,
-                                          image: imageUrl.toString(),
+                                          image: imageUrl,
                                         );
                                       },
                                       child: Icon(
@@ -137,10 +142,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
               //     // disable notifications
               //     // contact us
-              //   ],
-              // );
+
             }
-            return const Center();
+            return const Text('');
           },
         ),
       ),

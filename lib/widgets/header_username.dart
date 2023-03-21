@@ -16,7 +16,7 @@ class HeaderUsername extends StatelessWidget {
           if (AuthService.firebaseUser != null) {
             DocumentSnapshot docs = snapshot.data!.docs[0];
             return Padding(
-              padding: const EdgeInsets.only(top: 12.0),
+              padding: const EdgeInsets.only(top: 10.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

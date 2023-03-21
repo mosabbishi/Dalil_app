@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/models/stores_model.dart';
 import 'package:dalil_app/services/firestore_services.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -24,19 +25,7 @@ class _MapPageState extends State<MapPage> {
     );
     _setCircles();
     _getCurrentLocation();
-    // stores.forEach((element) {
-    //   markers.add(
-    //     Marker(
-    //       markerId: MarkerId(element.name!),
-    //       draggable: false,
-    //       infoWindow: InfoWindow(
-    //         title: element.name!,
-    //         snippet: element.address!,
-    //       ),
-    //       position: element.location!,
-    //     ),
-    //   );
-    // });
+
     super.initState();
   }
 
@@ -49,73 +38,75 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(alignment: Alignment.bottomCenter, children: [
-          GoogleMap(
-            initialCameraPosition: _initialCameraPostion,
-            markers: Set.from(markers),
-            mapType: MapType.normal,
-            mapToolbarEnabled: true,
-            myLocationEnabled: true,
-            onMapCreated: onMapCreated,
-            circles: _circles,
-          ),
-          StreamBuilder(
-              stream: FireStoreServices.storesCollection.snapshots(),
-              builder: (context, snapshot) {
-                return Container(
-                  margin: const EdgeInsets.all(8.0),
-                  height: 120,
-                  width: double.infinity,
-                  child: PageView.builder(
-                    controller: _pageCintroller,
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.0),
-                              color: Styles.white,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(12.0),
-                                    bottomLeft: Radius.circular(12.0),
-                                  ),
-                                  child: Image.network(
-                                    snapshot.data!.docs[index]['header-image'],
-                                    fit: BoxFit.cover,
-                                    height: 110,
-                                  ),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      snapshot.data!.docs[index]['name'],
-                                      overflow: TextOverflow.ellipsis,
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(alignment: Alignment.bottomCenter, children: [
+            GoogleMap(
+              initialCameraPosition: _initialCameraPostion,
+              markers: Set.from(markers),
+              mapType: MapType.normal,
+              mapToolbarEnabled: true,
+              myLocationEnabled: true,
+              onMapCreated: onMapCreated,
+              circles: _circles,
+            ),
+            StreamBuilder(
+                stream: FireStoreServices.storesCollection.snapshots(),
+                builder: (context, snapshot) {
+                  return Container(
+                    margin: const EdgeInsets.all(8.0),
+                    height: 200,
+                    width: double.infinity,
+                    child: PageView.builder(
+                      controller: _pageCintroller,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.0),
+                                color: Styles.white,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(12.0),
+                                      topRight: Radius.circular(12.0),
                                     ),
-                                    Text(snapshot.data!.docs[index]['address']),
-                                  ],
-                                ),
-                              ],
+                                    child: FancyShimmerImage(
+                                      imageUrl: snapshot.data!.docs[index]
+                                          ['header-image'],
+                                      // boxFit: BoxFit.cover,
+                                      width: double.infinity,
+                                      height: 120,
+                                    ),
+                                  ),
+                                  Text(
+                                    snapshot.data!.docs[index]['name'],
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  Text(snapshot.data!.docs[index]['address']),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-        ]),
+                        );
+                      },
+                    ),
+                  );
+                }),
+          ]),
+        ),
       ),
     );
   }

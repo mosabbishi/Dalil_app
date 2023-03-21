@@ -1,14 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dalil_app/constant/styles.dart';
 import 'package:dalil_app/services/auth_service.dart';
 import 'package:dalil_app/services/firestore_services.dart';
-import 'package:dalil_app/widgets/business_hours.dart';
 import 'package:dalil_app/widgets/contact_row.dart';
-import 'package:dalil_app/widgets/positioned_icon.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class StoreDetails extends StatefulWidget {
@@ -20,7 +22,9 @@ class StoreDetails extends StatefulWidget {
 }
 
 class _StoreDetailsState extends State<StoreDetails> {
+  String imageUrl = '';
   final List<String> popUpList = ['بلاغ', 'شكوى'];
+  final List<String> optionsPopUpList = ['مشاركة', 'حفظ  علامة مرجعية'];
   final List<Map<String, String>> hours = [
     {
       'day': 'الأحد',
@@ -56,6 +60,18 @@ class _StoreDetailsState extends State<StoreDetails> {
     super.dispose();
   }
 
+  void uploadImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    Reference ref = FirebaseStorage.instance.ref().child('gallery');
+    await ref.putFile(File(image!.path));
+    ref.getDownloadURL().then((value) {
+      print(value);
+      setState(() {
+        imageUrl = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.height;
@@ -86,27 +102,42 @@ class _StoreDetailsState extends State<StoreDetails> {
                     Container(
                       alignment: Alignment.bottomRight,
                       width: double.infinity,
-                      color: Colors.white24,
-                      child: Text(
-                        widget.documentSnapshot['name'],
-                      ),
-                    ),
-                    Positioned(
-                      top: 20,
-                      left: 0,
-                      right: 0,
-                      child: PositionedIcon(
-                        function: () async {
-                          await FireStoreServices.addToBookmarks(
-                            id: widget.documentSnapshot.id,
-                            user: AuthService.firebaseUser!.email.toString(),
-                            image: widget.documentSnapshot['header-image'],
-                            name: widget.documentSnapshot['name'],
-                            type: widget.documentSnapshot['type'],
-                            address: widget.documentSnapshot['address'],
-                            location: widget.documentSnapshot['location'],
-                          );
-                        },
+                      height: 37,
+                      color: Colors.black38,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PopupMenuButton(
+                            icon: Icon(
+                              Icons.more_vert_outlined,
+                              color: Styles.white,
+                            ),
+                            color: Colors.amberAccent,
+                            position: PopupMenuPosition.under,
+                            itemBuilder: (context) => optionsPopUpList
+                                .map((opt) => PopupMenuItem(
+                                      child: Text(
+                                        opt,
+                                      ),
+                                      onTap: () async {
+                                        await FireStoreServices.addToBookmarks(
+                                          id: widget.documentSnapshot.id,
+                                          user: AuthService.firebaseUser!.email
+                                              .toString(),
+                                          image: widget
+                                              .documentSnapshot['header-image'],
+                                          name: widget.documentSnapshot['name'],
+                                          type: widget.documentSnapshot['type'],
+                                          address: widget
+                                              .documentSnapshot['address'],
+                                          location: widget
+                                              .documentSnapshot['location'],
+                                        );
+                                      },
+                                    ))
+                                .toList(),
+                          )
+                        ],
                       ),
                     ),
                   ],
@@ -184,16 +215,52 @@ class _StoreDetailsState extends State<StoreDetails> {
             style: TextStyle(fontSize: 24),
           ),
           Column(
-            children: hours
+            children: [widget.documentSnapshot['hours']]
                 .map(
-                  (item) => BusinessHours(
-                    day: '${item['day']}',
-                    opening: '${item['open']}',
-                    closing: '${item['close']}',
+                  (day) => Column(
+                    children: [
+                      Row(
+                        children: [
+                          const Text('السبت : '),
+                          Text(day['sat']),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('الأحد : '),
+                          Text(day['sun']),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('الإثنين : '),
+                          Text(day['mon']),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('الثلاثاء : '),
+                          Text(day['tue']),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('الأربعاء : '),
+                          Text(day['wen']),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Text('الخميس : '),
+                          Text(day['thu']),
+                        ],
+                      ),
+                    ],
                   ),
                 )
                 .toList(),
           ),
+
           const Text(
             'الموقع على الخريطة',
             style: TextStyle(fontSize: 24),
@@ -265,7 +332,16 @@ class _StoreDetailsState extends State<StoreDetails> {
           children: [
             const Text('أضف صورة'),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                uploadImage();
+
+                // imgList.add(i);
+                FireStoreServices.storesCollection
+                    .doc(widget.documentSnapshot.id)
+                    .update({
+                  "gallery": [imageUrl],
+                });
+              },
               icon: const Icon(Icons.add),
             ),
           ],

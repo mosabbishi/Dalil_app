@@ -24,6 +24,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+ 
   var data = 'حدد موقعك من هنا';
   bool isActive = true;
   int _selectedIndex = 0;

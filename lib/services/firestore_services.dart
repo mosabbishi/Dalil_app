@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dalil_app/constant/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,16 +27,15 @@ class FireStoreServices {
               shrinkWrap: true,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, i) {
-                final storesData = snapshot.data;
-                DocumentSnapshot documentSnapshot = snapshot.data!.docs[i];
+                DocumentSnapshot docs = snapshot.data!.docs[i];
                 return StoreTile(
-                  headerImage: Constants.img,
-                  title: storesData!.docs[i]['name'],
-                  subtitle: storesData.docs[i]['type'],
-                  address: storesData.docs[i]['address'],
+                  headerImage: docs['header-image'],
+                  title: docs['name'],
+                  subtitle: docs['type'],
+                  address: docs['address'],
                   onTap: () {
                     Get.to(() => StoreDetails(
-                          documentSnapshot: documentSnapshot,
+                          documentSnapshot: docs,
                         ));
                   },
                 );
@@ -71,16 +69,15 @@ class FireStoreServices {
               shrinkWrap: true,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, i) {
-                final storesData = snapshot.data;
-                DocumentSnapshot documentSnapshot = snapshot.data!.docs[i];
+                DocumentSnapshot docs = snapshot.data!.docs[i];
                 return StoreTile(
-                  headerImage: Constants.img,
-                  title: storesData!.docs[i]['name'],
-                  subtitle: storesData.docs[i]['type'],
-                  address: storesData.docs[i]['address'],
+                  headerImage: docs['header-image'],
+                  title: docs['name'],
+                  subtitle: docs['type'],
+                  address: docs['address'],
                   onTap: () {
                     Get.to(() => StoreDetails(
-                          documentSnapshot: documentSnapshot,
+                          documentSnapshot: docs,
                         ));
                   },
                 );
@@ -147,7 +144,7 @@ class FireStoreServices {
     required String image,
     required GeoPoint location,
   }) async {
-    FireStoreServices.bookmarksCollection.doc(id).set({
+    FireStoreServices.bookmarksCollection.add({
       "username": user,
       "header-image": image,
       "name": name,

@@ -28,7 +28,7 @@ class StoreTile extends StatelessWidget {
           leading: FancyShimmerImage(
             imageUrl: headerImage,
             boxFit: BoxFit.cover,
-            width: 100,
+            width: 110,
           ),
           title: Text(title),
           subtitle: Column(
